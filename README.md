@@ -45,9 +45,9 @@ The second kernel module **handles** the motion interrupt by registering an inte
 ![](https://i.imgur.com/eD3pFyH.png)
 
 To be done:
--IOCTL to control timeout duration
--Parse raw data
--[Add LCD](https://www.digikey.ca/product-detail/en/adafruit-industries-llc/181/1528-1502-ND/5774228?utm_adgroup=&mkwid=shWzDs5xh&pcrid=311490127651&pkw=&pmt=&pdv=c&productid=5774228&slid=&gclid=Cj0KCQiAiNnuBRD3ARIsAM8KmlslutH_HnAIhLKwgoaq1fndYZQv7aj8ZTiZlcJMMY0J2rC1_IaQU5UaAp50EALw_wcB)
+1) IOCTL to control timeout duration
+2) Parse raw data
+3) [Add LCD](https://www.digikey.ca/product-detail/en/adafruit-industries-llc/181/1528-1502-ND/5774228?utm_adgroup=&mkwid=shWzDs5xh&pcrid=311490127651&pkw=&pmt=&pdv=c&productid=5774228&slid=&gclid=Cj0KCQiAiNnuBRD3ARIsAM8KmlslutH_HnAIhLKwgoaq1fndYZQv7aj8ZTiZlcJMMY0J2rC1_IaQU5UaAp50EALw_wcB)
 
 Feel free to contact me at gabe.teeger@gmail.com if you have any questions.
 
