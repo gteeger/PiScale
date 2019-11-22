@@ -29,7 +29,7 @@ The pins connections are:
 | 3v3          | VCC     |
 | BCM pin 4    | INT     |
 
-Enter ```$ ./piscale_script.sh``` to build everything, insert modules into kernel, and run application.
+Type ```$ ./piscale_script.sh``` to build everything, insert modules into kernel, and run the application.
 
 Weights will be read to a .txt file in the user_space folder and also displayed to the console.
 
