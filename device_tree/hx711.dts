@@ -1,0 +1,30 @@
+/dts-v1/;
+/plugin/;
+
+/{
+compatible = "brcm,bcm2708";
+fragment@0 {
+	_overlay_ {
+		target = <&gpio>;
+		weight_gpio: weight_gpio {
+			brcm,pins = <0x17 0x18>;
+			brcm,function = < 0x00 >;
+			};
+		};
+	};
+
+fragment@1 {
+	_overlay_ {
+		target-path = "/";
+	    	weight: weight {
+	    	    pinctrl-names = "default";
+    			pinctrl-0 = <&weight_gpio>;
+
+	        	compatible = "avia,hx711";
+	        	sck-gpios = <&gpio 0x17 0>;
+	        	dout-gpios = <&gpio 0x18 0>;
+	        	avdd-supply = <&vdd_3v3_reg>;
+			};
+		};
+	};
+};
