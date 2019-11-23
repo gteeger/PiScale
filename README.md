@@ -8,13 +8,13 @@
 
 ![alt text](https://i.imgur.com/e3NxqSr.jpg)
 
-Legend:
+Hardware Legend:
 1) 30 kg Load Sensor
 2) [HX711](https://www.sparkfun.com/products/13879)
 3) [MPU-6050](https://www.sparkfun.com/products/11028)
 4) [Raspberry Pi 3 A+](https://www.raspberrypi.org/products/raspberry-pi-3-model-a-plus/4)
 
-The pins connections are:
+The pin connections are:
 
 | Raspberry Pi | HX711   |
 |--------------|---------|
