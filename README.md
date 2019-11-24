@@ -34,7 +34,7 @@ Type ```$ ./piscale_script.sh``` to build everything, insert modules into kernel
 Weights will be read to a .txt file in the user_space folder and also displayed to the console.
 
 ### Description
-The PiScale system is meant to handle the kernel side of a scale built on any linux device. The PiScale reads raw data from an HX711 weight sensor and outputs to a file. There are many userspace programs available for parsing data from an HX711. Parsed data will be available in a future update.
+The PiScale system is meant to handle the kernel side of any weight scale built on a linux device. The PiScale reads raw data from an HX711 weight sensor and outputs to a file. There are many userspace programs available for parsing data from an HX711. Parsed data will be available in a future update.
 
 By design, the whole process is handled in a very efficient way. Despite the userspace program starting 3 threads, each with a while(1) loop, the system consumes a negligible amount of computing power. Two separate kernel modules are built and added into the kernel. The first module activates highly sensitive motion interrupts in the mpu 6050. Whenever a slight amount of motion is detected, the INT pin on the mpu 6050 goes high momentarily.
 
