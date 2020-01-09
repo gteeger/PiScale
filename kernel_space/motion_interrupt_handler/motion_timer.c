@@ -43,7 +43,7 @@ static DECLARE_WAIT_QUEUE_HEAD(intrpt_waitqueue);
 static void timeout(struct timer_list *t)
 {
 
-#ifdef DEBUG
+#if DEBUG
     u64 safe_jiffies = get_jiffies_64();
     printk(KERN_ALERT "TIMEOUT!\n");
     printk(KERN_ALERT "JIFFIES: %lld\n", safe_jiffies);
@@ -58,7 +58,7 @@ static irqreturn_t irq_handler(unsigned int irq, void *dev_id,
 			       struct pt_regs *regs)
 {
     u64 safe_jiffies = get_jiffies_64();
-#ifdef DEBUG
+#if DEBUG
     printk(KERN_ALERT "interrupt triggered\n");
 #endif
     dev_status = MEASURING;
@@ -73,24 +73,23 @@ static irqreturn_t irq_handler(unsigned int irq, void *dev_id,
 static int dev_open(struct inode *inode, struct file *filp)
 {
 
-#ifdef DEBUG
+#if DEBUG
     printk(KERN_ALERT "Inside the %s function\n", __FUNCTION__);
 #endif
 
     return 0;
 }
 
-
 static ssize_t dev_read(struct file *filp, char __user * buf,
 			size_t count, loff_t * f_pos)
 {
     ssize_t retval = 0;
-#ifdef DEBUG
+#if DEBUG
     printk(KERN_ALERT "Inside the %s function\n", __FUNCTION__);
 #endif
     wait_event_interruptible(intrpt_waitqueue, change == TRUE);
 
-#ifdef DEBUG
+#if DEBUG
     printk(KERN_ALERT "dev status = %d\n", dev_status);
 #endif
     retval = copy_to_user(buf, &dev_status, count);
@@ -101,14 +100,11 @@ static ssize_t dev_read(struct file *filp, char __user * buf,
 
 static int dev_release(struct inode *inode, struct file *filp)
 {
-#ifdef DEBUG
+#if DEBUG
     printk(KERN_ALERT "Inside the %s function\n", __FUNCTION__);
 #endif
     return 0;
 }
-
-
-
 
 
 static const struct file_operations dev_fops = {
@@ -126,7 +122,7 @@ static int __init motion_timer_init(void)
     int errno1, errno2;
     unsigned long IRQflags = IRQF_TRIGGER_RISING;
     change = FALSE;
-#ifdef DEBUG
+#if DEBUG
     printk(KERN_ALERT "Inside the %s function\n", __FUNCTION__);
 #endif
     timer_setup(&timer, timeout, 0);	///////////////////////
@@ -135,7 +131,7 @@ static int __init motion_timer_init(void)
     errno2 = gpio_direction_input(GPIO_INT_PIN);
 //cannot set debounce on rpi
     if (errno1 < 0 || errno2 < 0) {
-#ifdef DEBUG
+#if DEBUG
 	printk(KERN_ALERT "cannot map gpio with errno1 %d\n", errno1);
 	printk(KERN_ALERT "cannot map gpio with errno2 %d\n", errno2);
 #endif
@@ -146,7 +142,7 @@ static int __init motion_timer_init(void)
 	printk(KERN_ALERT "Unable to map IRQ");
 	return irq_number;
     }
-#ifdef DEBUG
+#if DEBUG
     printk(KERN_ALERT "gpio mapped to irq %d", irq_number);
 #endif
     status = request_irq(irq_number,
@@ -166,7 +162,7 @@ static int __init motion_timer_init(void)
 
 static void __exit motion_timer_exit(void)
 {
-#ifdef DEBUG
+#if DEBUG
     printk(KERN_ALERT "Inside the %s function\n", __FUNCTION__);
 #endif
     del_timer(&timer);
