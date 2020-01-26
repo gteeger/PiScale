@@ -23,9 +23,7 @@ typedef uint8_t __u8;
 #define HI (1)
 #define LO (0)
 
-#define GPIO_INT_PIN (4) // BCM 4
-#define MUX_SEL_PIN1 (22) //BCM 22
-#define MUX_SEL_PIN2 (27) //BCM 22
+#define GPIO_INT_PIN (4)  //BCM 4
 
 #define DEFAULT_TIMEOUT_MS (60000) //60 seconds
 #define DEFAULT_TIMEOUT_JIFFIES msecs_to_jiffies(DEFAULT_TIMEOUT_MS)
@@ -35,7 +33,6 @@ typedef uint8_t __u8;
 
 #define IOCTL_MAGIC 'k'
 
-#define MUX_SEL _IOW(IOCTL_MAGIC, 0, __u8)
 #define TIMEOUT_CHANGE _IOW(IOCTL_MAGIC, 1, __u8)
 #define ABORT_SIG _IO(IOCTL_MAGIC, 2)
 

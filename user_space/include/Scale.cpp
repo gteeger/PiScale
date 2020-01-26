@@ -54,7 +54,6 @@ float Scale::hx_read()
             print_val = (ret_val / SCALE_OFFSET) - tare_offset;
             printf("hx711 val = %.3f\n", print_val);
             data_array[idx] += print_val;
-            ioctl(fd, MUX_SEL, i);
         }
     }
     idx++;

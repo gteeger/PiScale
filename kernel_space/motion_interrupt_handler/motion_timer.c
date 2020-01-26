@@ -86,7 +86,6 @@ static ssize_t dev_read(struct file *filp, char __user * buf,
 static long scale_ioctl(struct file *filp, unsigned int cmd,
                         unsigned long arg)
 {
-    bool mux_sel1 = 0, mux_sel2 = 0;
     unsigned long t_out;
 #if DEBUG
     printk(KERN_ALERT "Inside the %s function\n", __FUNCTION__);
@@ -94,46 +93,6 @@ static long scale_ioctl(struct file *filp, unsigned int cmd,
 #endif
     switch(cmd)
     {
-
-    case MUX_SEL:
-
-        switch(arg)
-        {
-
-        case 0:
-            mux_sel1 = LO;
-            mux_sel2 = LO;
-            break;
-        case 1:
-            mux_sel1 = HI;
-            mux_sel2 = LO;
-            break;
-        case 2:
-            mux_sel1 = LO;
-            mux_sel2 = HI;
-            break;
-        case 3:
-            mux_sel1 = HI;
-            mux_sel2 = HI;
-        default:
-            mux_sel1 = LO;
-            mux_sel2 = LO;
-            break;
-
-        }
-        //val = gpio_get_value(MUX_SEL_PIN1);
-#if DEBUG
-        printk(KERN_ALERT "setting mux sel1 to %d \n", mux_sel1);
-        printk(KERN_ALERT "setting mux sel2 to %d \n", mux_sel2);
-#endif
-        gpio_set_value(MUX_SEL_PIN1, mux_sel1);
-        if(arg<2)
-        {
-            //if arg is always <2, there is only 1 sensor
-            gpio_set_value(MUX_SEL_PIN2, mux_sel2);
-        }
-        break;
-
     case ABORT_SIG:
         printk(KERN_ALERT "Abort Signal received\n");
         abort_sig = TRUE;
@@ -181,7 +140,7 @@ static int __init motion_timer_init(void)
 {
 
     int status;
-    int errno1, errno2, errno3, errno4, errno5, errno6;
+    int errno1, errno2;
     unsigned long IRQflags = IRQF_TRIGGER_RISING;
     custom_timeout = DEFAULT_TIMEOUT_JIFFIES;
     change = FALSE;
@@ -193,18 +152,12 @@ static int __init motion_timer_init(void)
     errno1 = gpio_request(GPIO_INT_PIN, "irq_gpio_pin");
     mdelay(50);
     errno2 = gpio_direction_input(GPIO_INT_PIN);
-
-    errno3 = gpio_request(MUX_SEL_PIN1, "MUX_SEL1");
-    errno4 = gpio_direction_output(MUX_SEL_PIN1, LO);
-    errno5 = gpio_request(MUX_SEL_PIN2, "MUX_SEL2");
-    errno6 = gpio_direction_output(MUX_SEL_PIN2, LO);
 //cannot set debounce on rpi
-    if (errno1 < 0 || errno2 < 0 || errno3 < 0 || errno4 < 0|| errno5 < 0 || errno6 < 0)
+    if (errno1 < 0 || errno2 < 0)
     {
 #ifdef DEBUG
         printk(KERN_ALERT "cannot map gpio with errno1 %d\n", errno1);
         printk(KERN_ALERT "cannot map gpio with errno2 %d\n", errno2);
-        printk(KERN_ALERT "cannot MUX Select %d\n", errno3);
 #endif
         return -1;
     }
@@ -241,8 +194,6 @@ static void __exit motion_timer_exit(void)
     del_timer(&timer);
     free_irq(irq_number, NULL);
     gpio_free(GPIO_INT_PIN);
-    gpio_free(MUX_SEL_PIN1);
-    gpio_free(MUX_SEL_PIN2);
     unregister_chrdev(MAJOR_NUM, "motion_timer_dev");
 }
 
