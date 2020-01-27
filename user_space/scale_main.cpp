@@ -1,10 +1,12 @@
 #include <iostream>
 #include <pthread.h>
-#include "include/Scale.h"
 #include <signal.h>
 #include <fcntl.h>
 #include <unistd.h>
 #include <atomic>
+#include <sys/ioctl.h>
+#include "include/Scale.h"
+#include "../kernel_space/motion_interrupt_handler/motion_timer.h"
 
 
 using namespace std;
