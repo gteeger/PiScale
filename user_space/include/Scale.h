@@ -2,9 +2,9 @@
 #define SCALE_H
 
 #define NUMBER_OF_LOAD_CELLS (4)
-#define SCALE_OFFSET 1
+#define SCALE_OFFSET (1)
 //#define SCALE_OFFSET 40327.0
-#define TARE_ITR 5 //how many readings to average to get tare value
+#define TARE_ITR (5) //how many readings to average to get tare value
 
 #define ARRAY_SIZE (1000)
 
