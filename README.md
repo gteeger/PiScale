@@ -23,6 +23,8 @@ Hardware Legend:
 5) [CD4052B Analog Multiplexer](http://www.ti.com/product/CD4052B)
 
 ![Multiplexer Circuit](https://i.imgur.com/cEFdBxD.jpg)
+
+
 This is an image of the circuit of the 4052 MUX. Each X and Y is connected to the white(A+) and green (A-) wires of a load cell; 
 
 The pin connections are:
