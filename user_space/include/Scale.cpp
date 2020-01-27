@@ -1,6 +1,6 @@
 #include <iostream>
 #include <sys/ioctl.h>
-#include "Scale.h
+#include "Scale.h"
 #include "../../kernel_space/motion_interrupt_handler/motion_timer.h"
 
 Scale::Scale() {}
