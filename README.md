@@ -6,9 +6,9 @@
 3) Tare function included
 4) Ability to read up to 4 load cells. The outputs from the cells are selected with a multiplexer.
 5) IOCTL is used to communicate between user and kernel space to:
-  -Send abort signal
-  -Cycle thru load sensors
-  -Change timeout duration
+  a) Send abort signal
+  b) Cycle thru load sensors
+  c) Change timeout duration
 
 ### Prerequisites
 1) You have to enable the avia-hx711 driver using ```menuconfig```  and rebuild the kernel. ([Raspberry Pi tutorial](https://www.raspberrypi.org/documentation/linux/kernel/building.md)) As a side note, do not activate the existing invensense mpu-6050 kernel driver. The mpu-6050 is directly programmed by my driver, specifically to activate motion sensing. 
