@@ -10,5 +10,5 @@ make
 sudo insmod mpu6050.ko
 make clean
 cd ../../user_space
-gcc pi_scale.c -o pi_scale -lpthread
+make
 ./pi_scale
