@@ -1,4 +1,4 @@
-# PiScale 2.0
+# PiScale
 
 ### Updates:
 1) User-space program is now written in C++ with an interface to a Scale class.
