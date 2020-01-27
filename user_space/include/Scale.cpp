@@ -1,26 +1,20 @@
 #include "Scale.h"
 #include <iostream>
 
-Scale::Scale()
-{
-
-    set_status(OFF);
-}
+Scale::Scale() {}
 
 Scale::~Scale() {}
 
 
 void Scale::init_scale()
 {
-    //num_cells = load_cells;
+    set_status(OFF);
     tare_offset = tare();
-
 }
 float Scale::tare()
 {
 
     float tare_val = 0;
-
     //reset tare offset
     tare_offset = 0;
 
@@ -55,19 +49,15 @@ float Scale::hx_read()
     {
         if(fscanf(proc, "%lu", &ret_val))
         {
-
             print_val = (ret_val / SCALE_OFFSET) - tare_offset;
             printf("hx711 val = %.3f\n", print_val);
             data_array[idx] += print_val;
             ioctl(fd, MUX_SEL, i);
         }
-
     }
     idx++;
-
     fclose(proc);
     return print_val;
-
 }
 
 void Scale::set_status(bool status_flag)
