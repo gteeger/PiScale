@@ -1,11 +1,6 @@
 #ifndef SCALE_H
 #define SCALE_H
 
-#include <iostream>
-/* Share header file for ioctl */
-#include "../../kernel_space/motion_interrupt_handler/motion_timer.h"
-#include <sys/ioctl.h>
-
 #define NUMBER_OF_LOAD_CELLS (4)
 
 #define SCALE_OFFSET 1
