@@ -22,7 +22,7 @@ static char dev_status;
 volatile bool change;
 volatile bool abort_sig;
 static DECLARE_WAIT_QUEUE_HEAD(intrpt_waitqueue);
-int custom_timeout;
+static int custom_timeout;
 
 static void timeout(struct timer_list *t)
 {
