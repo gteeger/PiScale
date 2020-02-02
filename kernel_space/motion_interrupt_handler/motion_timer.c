@@ -57,7 +57,7 @@ static irqreturn_t irq_handler(unsigned int irq, void *dev_id,
 static int dev_open(struct inode *inode, struct file *filp)
 {
 
-#ifdef DEBUG
+#if DEBUG
     printk(KERN_ALERT "Inside the %s function\n", __FUNCTION__);
 #endif
 
@@ -145,7 +145,7 @@ static int __init motion_timer_init(void)
     custom_timeout = DEFAULT_TIMEOUT_JIFFIES;
     change = FALSE;
     abort_sig = FALSE;
-#ifdef DEBUG
+#if DEBUG
     printk(KERN_ALERT "Inside the %s function\n", __FUNCTION__);
 #endif
     timer_setup(&timer, timeout, 0);	///////////////////////
@@ -155,7 +155,7 @@ static int __init motion_timer_init(void)
 //cannot set debounce on rpi
     if (errno1 < 0 || errno2 < 0)
     {
-#ifdef DEBUG
+#if DEBUG
         printk(KERN_ALERT "cannot map gpio with errno1 %d\n", errno1);
         printk(KERN_ALERT "cannot map gpio with errno2 %d\n", errno2);
 #endif
@@ -167,7 +167,7 @@ static int __init motion_timer_init(void)
         printk(KERN_ALERT "Unable to map IRQ");
         return irq_number;
     }
-#ifdef DEBUG
+#if DEBUG
     printk(KERN_ALERT "gpio mapped to irq %d", irq_number);
 #endif
     status = request_irq(irq_number,
@@ -188,7 +188,7 @@ static int __init motion_timer_init(void)
 
 static void __exit motion_timer_exit(void)
 {
-#ifdef DEBUG
+#if DEBUG
     printk(KERN_ALERT "Inside the %s function\n", __FUNCTION__);
 #endif
     del_timer(&timer);
