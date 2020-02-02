@@ -3,7 +3,7 @@
 
 #include <linux/ioctl.h>
 typedef uint8_t __u8;
-//its highly likely that these will attempted to be redefined
+//its highly likely that these will be attempted to be redefined
 #ifndef TRUE
 #define TRUE 1 //redefined in header
 #endif
