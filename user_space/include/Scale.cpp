@@ -47,14 +47,12 @@ float Scale::hx_read()
         return -1;
     }
 
-    for(int i = 0; i < NUMBER_OF_LOAD_CELLS; i++)
+
+    if(fscanf(proc, "%lu", &ret_val))
     {
-        if(fscanf(proc, "%lu", &ret_val))
-        {
-            print_val = (ret_val / SCALE_OFFSET) - tare_offset;
-            printf("hx711 val = %.3f\n", print_val);
-            data_array[idx] += print_val;
-        }
+        print_val = (ret_val / SCALE_OFFSET) - tare_offset;
+        printf("hx711 val = %.3f\n", print_val);
+        data_array[idx] += print_val;
     }
     idx++;
     fclose(proc);
