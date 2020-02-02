@@ -46,8 +46,6 @@ float Scale::hx_read()
         fprintf(stderr, "error: process open failed.\n");
         return -1;
     }
-
-
     if(fscanf(proc, "%lu", &ret_val))
     {
         print_val = (ret_val / SCALE_OFFSET) - tare_offset;
