@@ -43,6 +43,8 @@ public:
     double tare();
     void push_data(double data);
     int fd;
+    
+    friend ostream &operator<<(ostream &out, Scale &scale);
 
 private:
     vector<double> data_vector;
