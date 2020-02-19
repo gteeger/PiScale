@@ -1,16 +1,10 @@
 #ifndef SCALE_H
 #define SCALE_H
-#include <vector>
-#include <iostream>
-/* Share header file for ioctl */
-#include <sys/ioctl.h>
 #include "../../kernel_space/motion_interrupt_handler/motion_timer.h"
-using namespace std;
-
-#define SCALE_OFFSET 1
-//#define SCALE 40327.0
-
-#define TARE_ITR 5
+#define NUMBER_OF_LOAD_CELLS (4)
+#define SCALE_OFFSET (1)
+//#define SCALE_OFFSET 40327.0
+#define TARE_ITR (5) //how many readings to average to get tare value
 
 #define ARRAY_SIZE (1000)
 
@@ -27,30 +21,28 @@ using namespace std;
 #define OFF 0 //redefined
 #endif
 
-
 class Scale
 {
 public:
     Scale();
     ~Scale();
     void init_scale();
-    double hx_read();
-    void set_status(const bool status_flag);
-    bool get_status() const;
+    float hx_read();
+    void set_status(bool status_flag);
+    bool get_status();
     void change_timeout(unsigned long msecs);
-    void clear_data();
-    void print_data();
-    double tare();
-    void push_data(double data);
     int fd;
 
+
 private:
-    vector<double> data_vector;
-    bool current_system_status;
-    int idx;
-    double tare_offset;
+    int num_cells;
+    volatile float tare_offset;
+    float tare();
+    volatile int idx;
+    volatile bool current_system_status;
+    int data_array[ARRAY_SIZE];
+
 
 };
 
 #endif // SCALE_H
-

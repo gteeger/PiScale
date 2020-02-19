@@ -1,6 +1,4 @@
 #include "Scale.h"
-
-
 Scale::Scale() : current_system_status(OFF), idx(0), tare_offset(0) {}
 
 Scale::~Scale(){clear_data();}
