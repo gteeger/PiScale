@@ -18,8 +18,8 @@
 
 Hardware Legend:
 1) 30 kg Load Sensor
-2) [HX711](https://www.sparkfun.com/products/13879)
-3) [MPU-6050](https://www.sparkfun.com/products/11028)
+2) [HX711](https://www.sparkfun.com/products/13879) : this is an IC which is a combination of an analog to digital converter and programmable gain amplifier. It uses a bit-banging protocol, so its clock and data lines must be connected to GPIO pins. 
+3) [MPU-6050](https://www.sparkfun.com/products/11028) : Accelerometer/Gyroscope. Used as a motion detector.
 4) [Raspberry Pi 3 A+](https://www.raspberrypi.org/products/raspberry-pi-3-model-a-plus/4)
 
 The pin connections are:
@@ -44,7 +44,7 @@ Weights will be read to a .txt file in the user_space folder and also displayed 
 ### Description
 The PiScale system is meant to handle the kernel side of any weight scale built on a linux device. The PiScale reads raw data from an HX711 weight sensor and outputs to a file. There are many userspace programs available for parsing data from an HX711. 
 
-By design, the whole process is handled in a very efficient way. Despite the userspace program starting 2 threads, each with a while(1) loop, the system consumes a negligible amount of computing power. Two separate kernel modules are built and added into the kernel. The first module activates highly sensitive motion interrupts in the mpu 6050. Whenever a slight amount of motion is detected, the INT pin on the mpu 6050 goes high momentarily.
+By design, the whole process is handled is very efficient. Despite the userspace program starting 2 threads, each with a while(1) loop, the system consumes a negligible amount of computing power. Two separate kernel modules are built and added into the kernel. The first module activates highly sensitive motion interrupts in the mpu 6050. Whenever a slight amount of motion is detected, the INT pin on the mpu 6050 goes high momentarily.
 
 The second kernel module **handles** the motion interrupt by registering an interrupt and attaching a handler function. The module uses ```wake_up_interruptible``` and ```wait_event_interruptible``` to sleep while waiting for a motion interrupt. When an interrupt is received, the system is signalled to be active for 40 seconds (time can be changed in header file). The timer restarts everytime a motion interrupt is received and the system remains active for another 60 seconds. During the active period, the user space application is woken-up and a producer-consumer situation safely takes place without any race conditions. The consumer thread sleeps when there is no more data to consume.
 
