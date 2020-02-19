@@ -1,6 +1,4 @@
 #include "Scale.h"
-
-
 Scale::Scale() : current_system_status(OFF), idx(0), tare_offset(0) {}
 
 Scale::~Scale(){clear_data();}
@@ -11,12 +9,7 @@ void Scale::init_scale()
 }
 void Scale::print_data()
 {
-    vector<double>::iterator it = data_vector.begin();
-
-    for(; it != data_vector.end(); it++)
-    {
-        cout <<"data value: "<< *it << endl;
-    }
+    cout << *this << endl;
 
 }
 void Scale::clear_data()
@@ -82,4 +75,15 @@ bool Scale::get_status() const
 void Scale::change_timeout(const unsigned long msecs)
 {
     ioctl(fd, TIMEOUT_CHANGE, msecs);
+}
+
+ostream &operator<<(ostream &out, Scale &scale){
+
+    vector<double>::iterator it = scale.data_vector.begin();
+
+    for(; it != scale.data_vector.end(); it++)
+    {
+        out <<"data value: "<< *it << endl;
+    }
+    return out;
 }
