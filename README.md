@@ -3,19 +3,19 @@
 ### Updates:
 April 7th 2020
 
-1) I've begun using [these load sensors from Sparkfun](https://www.sparkfun.com/products/10245)
-2) I made a PCB in KiCAD  to integrate various components. See hardware folder for schematic, layout, BOM, and gerbers.
-3) The PCB is compatible with either Arduino or Raspberry Pi. There are through holes in the PCB to mount an Arduino Nano
+1) I switched to[these load sensors from Sparkfun](https://www.sparkfun.com/products/10245).
+2) PCB designed in KiCAD to integrate various components. See hardware folder for schematic, layout, BOM, and gerbers.
+3) The PCB is compatible with either Arduino or Raspberry Pi. There are through holes in the PCB to mount an Arduino Nano.
 4) There are numerous taps on the PCB allowing external connection to a Raspberry Pi.
 5) Jumpers are used to disconnect the Arduino and Raspberry Pi 3V3 and 5V power supplies.
-6) On board buttons can be used to managed interrupts
-7) There is a circuit to properly combine 4 half-bridge load sensors based on the [combinator board](https://www.sparkfun.com/products/13878) from Sparkfun. The correct connections for the 4 load sensors are written in silk screen on the PCB (UL: upper left, UR: upper right, LL: lower left, LR: lower right )
-8) It is also possible to attach a [full bridge load sensor](https://www.sparkfun.com/products/13329) to the pins on the PCB marked Red, Black, Green, White, Yellow
+6) On board buttons can be used to manage interrupts.
+7) There is a circuit to properly combine 4 half-bridge load sensors based on the [combinator board](https://www.sparkfun.com/products/13878) from Sparkfun. The correct connections for the 4 load sensors are written in silk screen on the PCB (UL: upper left, UR: upper right, LL: lower left, LR: lower right ).
+8) It is also possible to attach a [full bridge load sensor](https://www.sparkfun.com/products/13329) to the pins on the PCB marked E+, E-. A+, A-, B+, B-.
 9) There is room for an MPU-6050 to be mounted on the PCB, and pins to connect and LCD. Both the MPU and the LCD pins are connected to I2C SDA and SCL wires.
-10) You can connect an external power supply to the PCB (Like a 9V battery)
-11) Jumpers can be used to connect to either the A or B channel of the HX711 (see the HX711 datasheet for more information)
-12) A jumper can be used to connect the HX711 to either a 5V or 3V3 power supply
-13) Arduino code is still in progress but Raspberry Pi code still works fine
+10) You can connect an external power supply to the PCB (Like a 9V battery) that is connected to the Vin pin of the Arduino.
+11) Jumpers are used to connect to either the A or B channel of the HX711 (see the HX711 datasheet for more information on A and B channels).
+12) A jumper is used to connect the HX711 to either a 5V or 3V3 power supply.
+13) Arduino code is still in progress but Raspberry Pi code still works fine.
 
  ![](https://imgur.com/0xaxzA0.jpg)
  ![](https://imgur.com/LUfB7Sy.jpg)
@@ -29,7 +29,7 @@ Jan 26th 2020
   a) Send abort signal.
   b) Change timeout duration.
   
-### Prerequisites
+### Raspberry Pi Prerequisites
 1) You have to enable the avia-hx711 driver using ```menuconfig```  and rebuild the kernel. ([Raspberry Pi tutorial](https://www.raspberrypi.org/documentation/linux/kernel/building.md)) As a side note, do not activate the existing invensense mpu-6050 kernel driver. The mpu-6050 is directly programmed by my driver, specifically to activate motion sensing. 
 2) You have to add the custom device tree overlay in the device tree folder to your personal device. I built the .dtbo using the ```dtc``` command and made sure it was added to the device tree.([Raspberry Pi tutorial](https://www.raspberrypi.org/documentation/configuration/device-tree.md))
 3) Make the included script executible using ```chmod u+x piscale_script.sh```
