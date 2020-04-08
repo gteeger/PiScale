@@ -1,0 +1,51 @@
+ref,value,footprint
+BT1,BATTERY,0.1 inch pins
+C1,10uF,SM0805
+C2,0.1uF,SM0805
+C3,0.1uF,SM0805
+C4,0.1uF,SM0805
+C5,0.1uF,SM0805
+C6,10uF,SM0805
+C7,0.1uF,SM0805
+C8,0.1uF,SM0805
+D1,LED,SM0805
+JP1,JUMPER3,0.1 inch pins
+JP2,JUMPER3,0.1 inch pins
+JP3,JUMPER3,0.1 inch pins
+JP4,JUMPER,0.1 inch pins
+JP5,JUMPER,0.1 inch pins
+JP6,JUMPER,0.1 inch pins
+L1,3.3uH,SM0805
+P1,BUTT1,0.1 inch pins
+P2,DAT,0.1 inch pins
+P3,CLK,0.1 inch pins
+P4,INT,0.1 inch pins
+P5,VCC,0.1 inch pins
+P6,GND,0.1 inch pins
+P7,3V3,0.1 inch pins
+P8,SDA,0.1 inch pins
+P9,5V,0.1 inch pins
+P10,SCL,0.1 inch pins
+Q1,PNP,SOT-23
+R1,20K,SM0805
+R2,8.2K,SM0805
+R3,100R,SM0805
+R4,100R,SM0805
+R5,100R,SM0805
+R6,10K,SM0805
+R7,100R,SM0805
+R8,220R,SM0805
+R9,10K,SM0805
+R10,10K,SM0805
+R11,0R,SM0805
+SW1,SW_PUSH,https://www.digikey.ca/product-detail/en/omron-electronics-inc-emc-div/B3F-1000/SW400-ND/33150?utm_adgroup=Tactile%20Switches&utm_source=google&utm_medium=cpc&utm_campaign=Shopping_Switches&utm_term=&productid=33150&gclid=Cj0KCQjwybD0BRDyARIsACyS8mtFnTswz8YP9Z93u0gA2F53zC8Z7wWZJsPjoV6iaXblTxBXgwmxZeUaAkxoEALw_wcB
+SW2,SW_PUSH,https://www.digikey.ca/product-detail/en/omron-electronics-inc-emc-div/B3F-1000/SW400-ND/33150?utm_adgroup=Tactile%20Switches&utm_source=google&utm_medium=cpc&utm_campaign=Shopping_Switches&utm_term=&productid=33150&gclid=Cj0KCQjwybD0BRDyARIsACyS8mtFnTswz8YP9Z93u0gA2F53zC8Z7wWZJsPjoV6iaXblTxBXgwmxZeUaAkxoEALw_wcB
+U1,UL,0.1 inch pins
+U2,LOAD_SENSOR_JMP,0.1 inch pins
+U3,UR,0.1 inch pins
+U4,LL,0.1 inch pins
+U5,LR,0.1 inch pins
+U6,HX711,See datasheet
+U7,ARDUINO2,https://www.amazon.ca/Arduino-ELEGOO-ATmega328P-Compatible-Without/dp/B071NMD14Y
+U8,MPU6050,https://www.amazon.ca/Gikfun-MPU-6050-Accelerometer-Gyroscope-EK1091x3C/dp/B07JPK26X2/ref=sr_1_1?keywords=my%5Cpu+6050&qid=1586312509&s=electronics&sr=1-1
+U9,LCD,Any LCD with I2C connection
