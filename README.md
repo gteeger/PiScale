@@ -17,10 +17,10 @@ April 7th 2020
 12) A jumper can be used to connect the HX711 to either a 5V or 3V3 power supply
 13) Arduino code is still in progress but Raspberry Pi code still works fine
 
- ![](https://imgur.com/0xaxzA0)
- ![](https://imgur.com/LUfB7Sy)
- ![PCB Front](https://imgur.com/KrL7wAd)
- ![PCB Back](https://imgur.com/fgsT8lq)
+ ![](https://imgur.com/0xaxzA0.jpg)
+ ![](https://imgur.com/LUfB7Sy.jpg)
+ ![PCB Front](https://imgur.com/KrL7wAd.jpg)
+ ![PCB Back](https://imgur.com/fgsT8lq.jpg)
 Jan 26th 2020
 1) User-space program is now written in C++ with an interface to a Scale class.
 2) Pressing ctrl+c while program is running issues a signal to abort the program and notifies kernel space to take appropriate action (unlock mutexes, notify waiting tasks).
