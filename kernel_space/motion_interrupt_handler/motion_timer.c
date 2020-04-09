@@ -17,16 +17,19 @@ static struct timer_list timer;
 static void timeout(struct timer_list *t);
 static irqreturn_t irq_handler(unsigned int irq, void *dev_id,
                                struct pt_regs *regs);
-static int irq_number;
-static char dev_status;
+                               int irq_number;
+char dev_status;
 volatile bool change;
 volatile bool abort_sig;
 static DECLARE_WAIT_QUEUE_HEAD(intrpt_waitqueue);
 static int custom_timeout;
 
+void bottom_half_tasklet(unsigned long x);
+DECLARE_TASKLET(bottom_half, bottom_half_tasklet, 0);
+
 static void timeout(struct timer_list *t)
 {
-
+	 
 #if DEBUG
     u64 safe_jiffies = get_jiffies_64();
     printk(KERN_ALERT "TIMEOUT!\n");
@@ -41,18 +44,26 @@ static void timeout(struct timer_list *t)
 static irqreturn_t irq_handler(unsigned int irq, void *dev_id,
                                struct pt_regs *regs)
 {
-    u64 safe_jiffies = get_jiffies_64();
 #if DEBUG
     printk(KERN_ALERT "interrupt triggered\n");
+#endif
+	 tasklet_schedule(&bottom_half);
+    return IRQ_HANDLED;
+}
+
+
+void bottom_half_tasklet(unsigned long x){
+	
+	 u64 safe_jiffies = get_jiffies_64();
+#if DEBUG
+    printk(KERN_ALERT "Inside the %s function\n", __FUNCTION__);
 #endif
     dev_status = MEASURING;
     mod_timer(&timer, safe_jiffies + custom_timeout);
     change = TRUE;
     wake_up_interruptible(&intrpt_waitqueue);
 
-    return IRQ_HANDLED;
 }
-
 
 static int dev_open(struct inode *inode, struct file *filp)
 {
@@ -148,11 +159,10 @@ static int __init motion_timer_init(void)
 #if DEBUG
     printk(KERN_ALERT "Inside the %s function\n", __FUNCTION__);
 #endif
-    timer_setup(&timer, timeout, 0);	///////////////////////
+    timer_setup(&timer, timeout, 0);
     errno1 = gpio_request(GPIO_INT_PIN, "irq_gpio_pin");
     mdelay(50);
     errno2 = gpio_direction_input(GPIO_INT_PIN);
-//cannot set debounce on rpi
     if (errno1 < 0 || errno2 < 0)
     {
 #if DEBUG

@@ -23,9 +23,9 @@ typedef uint8_t __u8;
 #define HI (1)
 #define LO (0)
 
-#define GPIO_INT_PIN (4)  //BCM 4
+#define GPIO_INT_PIN (17)  //BCM 17
 
-#define DEFAULT_TIMEOUT_MS (60000) //60 seconds
+#define DEFAULT_TIMEOUT_MS (1000) //1 second
 #define DEFAULT_TIMEOUT_JIFFIES msecs_to_jiffies(DEFAULT_TIMEOUT_MS)
 #define MAJOR_NUM (117)
 

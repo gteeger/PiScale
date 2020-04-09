@@ -56,7 +56,7 @@ The pin connections are:
 | I2C1 SDA     | SDA     |
 | I2C1 SCL     | SCL     |
 | 3v3          | VCC     |
-| BCM pin 4    | INT     |
+| BCM pin 17   | INT     |
 
 Type ```$ ./piscale_script.sh``` to build everything, insert modules into kernel, and run the application.
 
