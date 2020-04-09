@@ -8,19 +8,21 @@ April 7th 2020
 3) The PCB is compatible with either Arduino or Raspberry Pi. There are through holes in the PCB to mount an Arduino Nano.
 4) There are numerous taps on the PCB allowing external connection to a Raspberry Pi.
 5) Jumpers are used to disconnect the Arduino and Raspberry Pi 3V3 and 5V power supplies.
-6) On board buttons can be used to manage interrupts.
+6) On board buttons can be used to trigger interrupts.
 7) There is a circuit to properly combine 4 half-bridge load sensors based on the [combinator board](https://www.sparkfun.com/products/13878) from Sparkfun. The correct connections for the 4 load sensors are written in silk screen on the PCB (UL: upper left, UR: upper right, LL: lower left, LR: lower right ).
 8) It is also possible to attach a [full bridge load sensor](https://www.sparkfun.com/products/13329) to the pins on the PCB marked E+, E-. A+, A-, B+, B-.
-9) There is room for an MPU-6050 to be mounted on the PCB, and pins to connect and LCD. Both the MPU and the LCD pins are connected to I2C SDA and SCL wires.
+9) There is room for an MPU-6050 to be mounted on the PCB, and pins to connect and LCD. Both the MPU and the LCD pins are connected to I2C SDA and SCL lines.
 10) You can connect an external power supply to the PCB (Like a 9V battery) that is connected to the Vin pin of the Arduino.
 11) Jumpers are used to connect to either the A or B channel of the HX711 (see the HX711 datasheet for more information on A and B channels).
 12) A jumper is used to connect the HX711 to either a 5V or 3V3 power supply.
 13) Arduino code is still in progress but Raspberry Pi code still works fine.
+14) The MPU6050 ISR on the Raspberry Pi is now broken up into top and bottom halves.
 
  ![](https://imgur.com/0xaxzA0.jpg)
  ![](https://imgur.com/LUfB7Sy.jpg)
  ![PCB Front](https://imgur.com/KrL7wAd.jpg)
  ![PCB Back](https://imgur.com/fgsT8lq.jpg)
+ 
 Jan 26th 2020
 1) User-space program is now written in C++ with an interface to a Scale class.
 2) Pressing ctrl+c while program is running issues a signal to abort the program and notifies kernel space to take appropriate action (unlock mutexes, notify waiting tasks).
