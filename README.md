@@ -3,7 +3,7 @@
 ### Updates:
 April 7th 2020
 
-1) I switched to[these load sensors from Sparkfun](https://www.sparkfun.com/products/10245).
+1) I switched to [these load sensors from Sparkfun](https://www.sparkfun.com/products/10245).
 2) PCB designed in KiCAD to integrate various components. See hardware folder for schematic, layout, BOM, and gerbers.
 3) The PCB is compatible with either Arduino or Raspberry Pi. There are through holes in the PCB to mount an Arduino Nano.
 4) There are numerous taps on the PCB allowing external connection to a Raspberry Pi.
