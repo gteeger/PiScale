@@ -36,5 +36,8 @@ typedef uint8_t __u8;
 #define TIMEOUT_CHANGE _IOW(IOCTL_MAGIC, 1, __u8)
 #define ABORT_SIG _IO(IOCTL_MAGIC, 2)
 
+#define TIMEOUT_LIMIT_MS (2000000) // ~30 mins
+#define TIMEOUT_MIN_MS (500) //0.5 seconds
+ 
 
 #endif

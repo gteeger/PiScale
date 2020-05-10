@@ -42,12 +42,13 @@ static int __init mpu_init(void)
     struct i2c_adapter *i2c_adap;
     __u8 read_byte;
     __u8 write_byte;
+    int err;
 #if DEBUG
     printk(KERN_ALERT "Inside the %s function\n", __FUNCTION__);
 #endif
     i2c_adap = i2c_get_adapter(I2C_ADAPTER);
     mpu_client = i2c_new_device(i2c_adap, &mpu_info);
-    if (mpu_client == NULL) {
+    if (!mpu_client) {
 	printk(KERN_ALERT "cannot create new i2c device\n");
 	return -1;
     }
@@ -60,9 +61,10 @@ static int __init mpu_init(void)
     //first do a reset, PWR_MGMT_1 gets set to 0x00 after reset 0x80 = 0x10000000
     read_byte = i2c_smbus_read_byte_data(mpu_client, PWR_MGMT_1);
     write_byte = read_byte | 0x80;
-    if (i2c_smbus_write_byte_data(mpu_client, PWR_MGMT_1, write_byte) < 0) {
+    err = i2c_smbus_write_byte_data(mpu_client, PWR_MGMT_1, write_byte);
+    if (err < 0) {
 	printk(KERN_ALERT "Cannot write byte to device");
-	return -1;
+	goto fail;
     }
     mdelay(1000);
 
@@ -86,9 +88,10 @@ static int __init mpu_init(void)
 #endif
 
     write_byte = read_byte | 0x49;
-    if (i2c_smbus_write_byte_data(mpu_client, PWR_MGMT_1, write_byte) < 0) {
+    err = i2c_smbus_write_byte_data(mpu_client, PWR_MGMT_1, write_byte);
+    if (err < 0) {
 	printk(KERN_ALERT "Cannot write byte to device");
-	return -1;
+	goto fail;
     }
 #if DEBUG
     read_byte = i2c_smbus_read_byte_data(mpu_client, PWR_MGMT_1);
@@ -100,9 +103,10 @@ static int __init mpu_init(void)
 //wake from sleep
     read_byte = i2c_smbus_read_byte_data(mpu_client, PWR_MGMT_1);
     write_byte = read_byte & ~0x40;
-    if (i2c_smbus_write_byte_data(mpu_client, PWR_MGMT_1, write_byte) < 0) {
+    err = i2c_smbus_write_byte_data(mpu_client, PWR_MGMT_1, write_byte);
+    if (err < 0) {
 	printk(KERN_ALERT "Cannot write byte to device");
-	return -1;
+	goto fail;
     }
 
     mdelay(1000);
@@ -117,10 +121,11 @@ static int __init mpu_init(void)
 //set accel_on_delay to 3
     read_byte = i2c_smbus_read_byte_data(mpu_client, MOT_DETECT_CTRL);
     write_byte = read_byte | 0x30;
-    if (i2c_smbus_write_byte_data(mpu_client, MOT_DETECT_CTRL, write_byte)
-	< 0) {
+    err =
+	i2c_smbus_write_byte_data(mpu_client, MOT_DETECT_CTRL, write_byte);
+    if (err < 0) {
 	printk(KERN_ALERT "Cannot write byte to device");
-	return -1;
+	goto fail;
     }
     //mdelay(2000);
 #if DEBUG
@@ -130,9 +135,10 @@ static int __init mpu_init(void)
 /****************************************************************/
 //enable motion interrupts
     read_byte = i2c_smbus_read_byte_data(mpu_client, INT_STATUS);
-    if (i2c_smbus_write_byte_data(mpu_client, INT_ENABLE, 0x40) < 0) {
+    err = i2c_smbus_write_byte_data(mpu_client, INT_ENABLE, 0x40);
+    if (err < 0) {
 	printk(KERN_ALERT "Cannot write byte to device");
-	return -1;
+	goto fail;
     }
 #if DEBUG
     read_byte = i2c_smbus_read_byte_data(mpu_client, INT_ENABLE);
@@ -140,18 +146,24 @@ static int __init mpu_init(void)
 #endif
 /****************************************************************/
 //set motion detection threshold
-    if (i2c_smbus_write_byte_data
-	(mpu_client, MOT_THR, MOTION_INT_THRESHOLD) < 0) {
+    err =
+	i2c_smbus_write_byte_data(mpu_client, MOT_THR,
+				  MOTION_INT_THRESHOLD);
+    if (err < 0) {
 	printk(KERN_ALERT "Cannot write byte to device");
-	return -1;
+	goto fail;
     }
-    if (i2c_smbus_write_byte_data(mpu_client, MOT_DUR, MOTION_INT_DURATION)
-	< 0) {
+    err =
+	i2c_smbus_write_byte_data(mpu_client, MOT_DUR,
+				  MOTION_INT_DURATION);
+    if (err < 0) {
 	printk(KERN_ALERT "Cannot write byte to device");
-	return -1;
+	goto fail;
     }
 
     return 0;
+  fail:
+    return err;
 }
 
 static void __exit mpu_exit(void)
