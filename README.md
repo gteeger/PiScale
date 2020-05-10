@@ -1,6 +1,11 @@
 # PiScale
 
 ### Updates:
+May 10th 2020
+
+1) Now the proper error codes get returned when doing I2C programming of mpu6505
+2) Proper safety checks on the arguments passed to ioctl function in kernel space from user space.
+
 April 7th 2020
 
 1) I switched to [these load sensors from Sparkfun](https://www.sparkfun.com/products/10245).
