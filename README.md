@@ -3,8 +3,8 @@
 ### Updates:
 May 10th 2020
 
-1) Now the proper error codes get returned when doing I2C programming of mpu6505
-2) Proper safety checks on the arguments passed to ioctl function in kernel space from user space.
+1) Proper error codes get returned when doing I2C programming of mpu6050
+2) Safety checks on the arguments passed to ioctl function in kernel space from user space.
 
 April 7th 2020
 
